@@ -4,7 +4,7 @@
  * Revision: Version 1.0
 
 # Problem Statement
-The Oregon Drinking Water Services, Department of Environmental Quality, and the Water Resources Department go through rigorous steps to cleanse, purify, and treat the water before it is distributed to our households. In between each of these steps, the water treatment facilities take a lot of measurements to analyze the purity of the water relative to the quality goals of each step. We want to use recreate the quality measurement process with our project. Our scope is to test temperature, pH, and turbidity of different water samples using measurement devices and be able to record the data using Arduino Ide as well as to create a live plot using a Python script. This way we can recreate the quality measurement process on a smaller scale. 
+The Oregon Drinking Water Services, Department of Environmental Quality, and the Water Resources Department go through rigorous steps to cleanse, purify, and treat the water before it is distributed to our households. In between each of these steps, the water treatment facilities take a lot of measurements to analyze the purity of the water relative to the quality goals of each step. We want to use recreate the quality measurement process with our project. Our scope is to test temperature, pH, and turbidity of different water samples using measurement devices and be able to record the data using Arduino Ide as well as to create a plot using a Python script. This way we can recreate the quality measurement process on a smaller scale. 
 
 # Hardware Setup 
 | Part Name                                | Link                                                                      | Price (USD) |
