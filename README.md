@@ -111,13 +111,58 @@ void loop()
 }
 ```
 **Python Script for plotting the sensor reading**
+```
+import serial                           # Import serial module 
+import time
+
+ser = serial.Serial('COM3', 9600)       # Set up the serial line
+time.sleep(2)                           # Time delay to read and record the data
+                        
+Temp = []                                # empty lists to store the data
+pH =   []
+
+for i in range(50):
+    b = ser.readline()                  # read a byte string
+    string_n = b.decode()               # decode byte string into Unicode  
+    string = string_n.rstrip()          # remove \n and \r
+    temp = string[0:5]                  # Choose the columns to separate incoming data
+    ph = string[6:]
+    Temp.append(temp)                   # Update the empty lists we created in the beginning
+    pH.append(ph)
+    time.sleep(0.1)                     # Time delay to collect more data
+
+ser.close()                             # So it stops collecting data after reaching i range value
+
+import matplotlib.pyplot as plt         # Import matplotlib for plotting
+                                        # If using a Jupyter notebook include %matplotlib inline or %matplotlib notebook
+%matplotlib inline                  
+
+fig, ax = plt.subplots()                # Create axes and plot Temperature readings with customized plot
+
+plt.plot(Temp)
+plt.xlabel('Reading Value (#)')
+plt.ylabel('Temperature (\u00b0 F)')
+plt.title('Temperature Reading for Water Sample')
+plt.show()
+
+fig, ax = plt.subplots()                # Create axes and plot pH readings with customized plot
+
+ax.plot(pH)
+ax.set_xlabel('Reading Value (#)')
+ax.set_ylabel('pH')
+ax.set_title('pH Reading for Water Sample')
+plt.show()
+```
 
 # Results 
 The demonstration for this project consists of several different water samples that will be used to test each of the sensor and its output changing over time. For example, the pH demonstration would consist of placing the probe in tap water to get a steady pH reading, then pouring an additive like vinegar or lime juice that will offset the pH which we will be able to see on the plot in real time. The plot should look similar to the one below:
+![sample graph](https://user-images.githubusercontent.com/58315227/70395233-7a4d1800-19b1-11ea-8736-f679d0f03e01.jpg)
 
 # Future Work
-There is a lot of room for improvement when it comes to a project like this; especially when we use to Arduino parts from Sparkfun which support a lot of ways to incorporate further design in order to carry out more tasks and collect more data. We want to be able to use more devices to mimic the process flow of the water treatment facilities. We could possibly start out with dirty water with contaminants and use the sensors at multiple steps to make sure we reach the goal for water quality and then end up with water that is either cleaner than the initial sample or even drinkable. The diagram below shows the process flow followed by the water treatment facilities and how they have set placement for the checking the water quality. Using the code, we could also store the sensor readings onto an SD card or to the cloud for future analysis. 
+There is a lot of room for improvement when it comes to a project like this; especially when we use to Arduino parts from Sparkfun which support a lot of ways to incorporate further design in order to carry out more tasks and collect more data. We want to be able to use more devices to mimic the process flow of the water treatment facilities. We could possibly start out with dirty water with contaminants and use the sensors at multiple steps to make sure we reach the goal for water quality and then end up with water that is either cleaner than the initial sample or even drinkable. The diagram below shows the process flow followed by the water treatment facilities and how they have set placement for the checking the water quality. Using the code, we could also store the sensor readings onto an SD card or to the cloud for future analysis. We could also implement the Python script to allow live plotting of real time data which is more feasible for the water treatment facilities as they may require continuous monitoring of the water quality parameters.
+
 ![MultBarrierGoal](https://user-images.githubusercontent.com/58315227/70383964-eb49ec80-192b-11ea-80d3-671e860c0a33.png)
+
 [Source](www.oregon.gov/oha/PH/HealthyEnvironments/DrinkingWater/Operations/Treatment/Pages/index.aspx)
 
 Being able to use Arduino microprocessors and Python code to construct and understand how large scale facilities operate would be an excellent engineering outcome as well as a commemorable achievement. 
@@ -127,5 +172,3 @@ Creative Commons Attribution-ShareAlike CC BY-S. This license lets others remix,
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 **See Documentation file in this repository for all sources used for this project**
-
-
